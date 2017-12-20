@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.Localisation;
+﻿using Mal.XF.Infra.Converters;
+using Mal.XF.Infra.Localisation;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 

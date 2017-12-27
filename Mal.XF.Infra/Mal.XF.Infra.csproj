@@ -36,14 +36,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Converters\FilePathToImageSourceConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
+    <Compile Include="IO\IFileService.cs" />
     <Compile Include="Localisation\ITranslationManager.cs" />
     <Compile Include="Localisation\ITranslationProvider.cs" />
     <Compile Include="Localisation\ITranslationService.cs" />
     <Compile Include="Localisation\TranslationConverter.cs" />
     <Compile Include="Localisation\TranslationManager.cs" />
     <Compile Include="Localisation\TranslationService.cs" />
-    <Compile Include="PlatformInitializers\AndroidInitializerBase.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
@@ -84,7 +85,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

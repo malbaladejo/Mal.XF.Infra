@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mal.XF.Infra", "Mal.XF.Infra\Mal.XF.Infra.csproj", "{0DB882BE-3D4B-42FC-A211-CE953979F41F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mal.XF.Infra.Android", "Mal.XF.Infra.Android\Mal.XF.Infra.Android.csproj", "{3AA9571C-28E7-4B9A-8525-EF046B8C9A90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0DB882BE-3D4B-42FC-A211-CE953979F41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DB882BE-3D4B-42FC-A211-CE953979F41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DB882BE-3D4B-42FC-A211-CE953979F41F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AA9571C-28E7-4B9A-8525-EF046B8C9A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AA9571C-28E7-4B9A-8525-EF046B8C9A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AA9571C-28E7-4B9A-8525-EF046B8C9A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AA9571C-28E7-4B9A-8525-EF046B8C9A90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

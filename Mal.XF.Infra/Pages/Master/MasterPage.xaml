@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  xmlns:converters="clr-namespace:Mal.XF.Infra.Localisation;assembly=Mal.XF.Infra"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="Mal.XF.Infra.Pages.Master.MasterPage">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="{Binding Title}">
+            <!--<ListView ItemsSource="{Binding Tokens}"
+                      Padding="20">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Text="{Binding Label,
+                                       Converter={x:Static converters:TranslationConverter.Instance}}"
+                                Command="{Binding NavigateCommand}"
+                                CommandParameter="{Binding NavigationToken}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

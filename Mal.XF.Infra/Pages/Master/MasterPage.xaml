@@ -4,11 +4,12 @@
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   xmlns:converters="clr-namespace:Mal.XF.Infra.Localisation;assembly=Mal.XF.Infra"
                   prism:ViewModelLocator.AutowireViewModel="True"
-                  x:Class="Mal.XF.Infra.Pages.Master.MasterPage">
+                  x:Class="Mal.XF.Infra.Pages.Master.MasterPage"
+                  Title="Test title">
 
-    <MasterDetailPage.Master>
+    <!--<MasterDetailPage.Master>
         <ContentPage Title="{Binding Title}">
-            <!--<ListView ItemsSource="{Binding Tokens}"
+            --><!--<ListView ItemsSource="{Binding Tokens}"
                       Padding="20">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -18,8 +19,8 @@
                                 CommandParameter="{Binding NavigationToken}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>-->
+            </ListView>--><!--
         </ContentPage>
-    </MasterDetailPage.Master>
+    </MasterDetailPage.Master>-->
 
 </MasterDetailPage>

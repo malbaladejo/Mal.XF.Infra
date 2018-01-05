@@ -1,7 +1,7 @@
 ﻿using Mal.XF.Infra.Extensions;
 using Mal.XF.Infra.Localisation;
 using Mal.XF.Infra.Navigation;
-using Mal.XF.Infra.Pages.Master;
+using Mal.XF.Infra.Pages.MasterMenu;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using Xamarin.Forms;
@@ -21,7 +21,6 @@ namespace Mal.XF.Infra
             TranslationConverter.RegisterInstance(this.Container.Resolve<TranslationConverter>());
 
             this.Container.RegisterTypeForNavigation<NavigationPage>();
-            this.Container.RegisterViewWithViewModel<MasterPage, MasterViewModel>();
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Extensions\UnityContainerExtensions.cs" />
+    <Compile Include="MasterDetailApplicationBase.cs" />
     <Compile Include="Navigation\IDisplayableNavigationToken.cs" />
     <Compile Include="Navigation\IMasterDetailNavigationService.cs" />
     <Compile Include="Navigation\INavigationToken.cs" />

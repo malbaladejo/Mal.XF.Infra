@@ -1,14 +1,12 @@
 ﻿using Mal.XF.Infra.Navigation;
-using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 
 namespace Mal.XF.Infra.Pages.MasterMenu
 {
-    public class MasterMenuViewModel : BindableBase
+    internal class MasterMenuViewModel : BindableBase
     {
         private readonly INavigationService navigationService;
 

@@ -36,8 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Controls\IconLabel.cs" />
     <Compile Include="Converters\FilePathToImageSourceConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
+    <Compile Include="Fonts\IconFont.cs" />
     <Compile Include="IO\IFileService.cs" />
     <Compile Include="Layouts\RepeaterLayout.cs" />
     <Compile Include="Localisation\ITranslationManager.cs" />

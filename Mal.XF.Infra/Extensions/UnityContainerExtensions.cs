@@ -20,5 +20,12 @@ namespace Mal.XF.Infra.Extensions
             container.RegisterTypeForNavigation<TView>(typeof(TToken).FullName);
             ViewModelLocationProvider.Register<TView, TViewModel>();
         }
+
+        public static void RegisterViewForMasterDetailNavigation<TView, TViewModel>(this IUnityContainer container, IDisplayableNavigationToken token) where TView : Page
+        {
+            container.RegisterTypeForNavigation<TView>(token.NavigationToken.GetType().FullName);
+            ViewModelLocationProvider.Register<TView, TViewModel>();
+            container.Resolve<IMasterDetailNavigationService>().RegisterToken(token);
+        }
     }
 }

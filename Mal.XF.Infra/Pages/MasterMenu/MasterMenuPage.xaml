@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mal.XF.Infra.Pages.MasterMenu.MasterMenuPage"
+             Title="Menu title">
+    <StackLayout>
+        <Label Text="{Binding Title}"  />
+        <ListView ItemsSource="{Binding Tokens}"
+                  SelectedItem="{Binding SelectedToken, Mode=TwoWay}">           
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Icon}"  />
+                            <Label Text="{Binding Label}"  />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

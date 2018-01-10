@@ -9,7 +9,7 @@ namespace Mal.XF.Infra.Navigation
         {
             var parameters = new NavigationParameters();
             parameters.AddNavigationToken(token);
-            return navigationService.NavigateAsync(token.GetType().FullName, parameters, token.UseModalNavigation, token.Animated);
+            return navigationService.NavigateAsync(token.Url, parameters, token.UseModalNavigation, token.Animated);
         }
     }
 }

@@ -40,8 +40,10 @@
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="IO\IFileService.cs" />
     <Compile Include="Localisation\ITranslationManager.cs" />
+    <Compile Include="Localisation\ITranslationManagerReader.cs" />
     <Compile Include="Localisation\ITranslationProvider.cs" />
     <Compile Include="Localisation\ITranslationService.cs" />
+    <Compile Include="Localisation\LocalTranslationProviderBase.cs" />
     <Compile Include="Localisation\TranslationConverter.cs" />
     <Compile Include="Localisation\TranslationManager.cs" />
     <Compile Include="Localisation\TranslationService.cs" />

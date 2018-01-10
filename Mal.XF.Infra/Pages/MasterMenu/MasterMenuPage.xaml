@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localisation="clr-namespace:Mal.XF.Infra.Localisation;assembly=Mal.XF.Infra"
              x:Class="Mal.XF.Infra.Pages.MasterMenu.MasterMenuPage"
              Title="Menu title">
     <StackLayout>
@@ -12,7 +13,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Icon}"  />
-                            <Label Text="{Binding Label}"  />
+                            <Label Text="{Binding Label, Converter={x:Static localisation:TranslationConverter.Instance}}"  />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

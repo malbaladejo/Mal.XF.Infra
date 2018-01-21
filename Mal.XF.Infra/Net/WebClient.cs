@@ -8,7 +8,7 @@ namespace Mal.XF.Infra.Net
     {
         private static HttpClient client = new HttpClient(); // you should reuse a HttpClient!
 
-        public async Task<string> DownloadStringTaskAsync(string url)
+        public async Task<string> DownloadStringAsync(string url)
         {
             using (var response = await client.GetAsync(url))
             {

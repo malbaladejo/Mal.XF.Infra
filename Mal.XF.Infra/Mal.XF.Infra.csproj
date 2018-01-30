@@ -59,6 +59,7 @@
     <Compile Include="Navigation\NavigationParametersExtensions.cs" />
     <Compile Include="Navigation\NavigationServiceExtensions.cs" />
     <Compile Include="Navigation\NavigationTokenBase.cs" />
+    <Compile Include="Net\INetworkService.cs" />
     <Compile Include="Net\WebClient.cs" />
     <Compile Include="Pages\MasterMenu\MasterMenuPage.xaml.cs">
       <DependentUpon>MasterMenuPage.xaml</DependentUpon>

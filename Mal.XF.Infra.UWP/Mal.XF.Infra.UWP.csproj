@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IO\UwpFileService.cs" />
+    <Compile Include="Net\UwpNetworkService.cs" />
     <Compile Include="PlatformInitializers\UwpInitializerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Mal.XF.Infra.UWP.rd.xml" />

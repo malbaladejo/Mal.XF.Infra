@@ -51,6 +51,11 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Extensions\UnityContainerExtensions.cs" />
+    <Compile Include="Log\ILogger.cs" />
+    <Compile Include="Log\ILogManager.cs" />
+    <Compile Include="Log\LogItem.cs" />
+    <Compile Include="Log\LogManager.cs" />
+    <Compile Include="Log\LogSeverity.cs" />
     <Compile Include="MasterDetailApplicationBase.cs" />
     <Compile Include="Navigation\IDisplayableNavigationToken.cs" />
     <Compile Include="Navigation\IMasterDetailNavigationService.cs" />

@@ -5,5 +5,6 @@
         INavigationToken NavigationToken { get; }
         string Icon { get; }
         string Label { get; }
+        int DisplayOrder { get; }
     }
 }

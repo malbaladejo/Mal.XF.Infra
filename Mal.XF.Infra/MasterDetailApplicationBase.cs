@@ -1,4 +1,6 @@
-﻿using Mal.XF.Infra.Navigation;
+﻿using Mal.XF.Infra.Extensions;
+using Mal.XF.Infra.Navigation;
+using Mal.XF.Infra.Pages.Log;
 using Mal.XF.Infra.Pages.Master;
 using Mal.XF.Infra.Pages.MasterMenu;
 using Microsoft.Practices.Unity;
@@ -18,6 +20,10 @@ namespace Mal.XF.Infra
             var rootPage = new MasterPage(menu);
             this.MainPage = rootPage;
             menuVm.NavigateToFirst();
+
+#if DEBUG
+            this.Container.RegisterViewForMasterDetailNavigation<LogPage, LogViewModel>(new LogDisplayableToken());
+#endif
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Log
@@ -9,13 +11,25 @@ namespace Mal.XF.Infra.Log
         public const string LogKey = "LogKey";
 
         public IReadOnlyCollection<LogItem> GetLogs()
+            => GetProperty<IReadOnlyCollection<LogItem>>(LogKey);
+
+        public async void WriteLog(LogItem item)
         {
-            throw new NotImplementedException();
+#pragma warning disable CS4014 
+            // Fire and forget
+            Task.Run(async () =>
+            {
+                var logs = this.GetLogs();
+
+                await SetPropertyAsync(LogKey,
+                    logs.Concat(new[] { item }));
+            });
+#pragma warning restore CS4014 
         }
 
-        public void ClearLog()
+        public async void ClearLog()
         {
-            throw new NotImplementedException();
+            await SetPropertyAsync(LogKey, string.Empty);
         }
 
         private static T GetProperty<T>(string key)
@@ -27,6 +41,12 @@ namespace Mal.XF.Infra.Log
             }
 
             return default(T);
+        }
+
+        private static async Task SetPropertyAsync(string key, object value)
+        {
+            Application.Current.Properties[key] = JsonConvert.SerializeObject(value);
+            await Application.Current.SavePropertiesAsync();
         }
     }
 }

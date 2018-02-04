@@ -53,6 +53,7 @@
     <Compile Include="Extensions\UnityContainerExtensions.cs" />
     <Compile Include="Log\ILogger.cs" />
     <Compile Include="Log\ILogManager.cs" />
+    <Compile Include="Log\Logger.cs" />
     <Compile Include="Log\LogItem.cs" />
     <Compile Include="Log\LogManager.cs" />
     <Compile Include="Log\LogSeverity.cs" />
@@ -66,6 +67,12 @@
     <Compile Include="Navigation\NavigationTokenBase.cs" />
     <Compile Include="Net\INetworkService.cs" />
     <Compile Include="Net\WebClient.cs" />
+    <Compile Include="Pages\Log\LogDisplayableToken.cs" />
+    <Compile Include="Pages\Log\LogPage.xaml.cs">
+      <DependentUpon>LogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Log\LogToken.cs" />
+    <Compile Include="Pages\Log\LogViewModel.cs" />
     <Compile Include="Pages\MasterMenu\MasterMenuPage.xaml.cs">
       <DependentUpon>MasterMenuPage.xaml</DependentUpon>
     </Compile>
@@ -81,6 +88,9 @@
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.3.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
@@ -116,6 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MasterMenu\MasterMenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\Log\LogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

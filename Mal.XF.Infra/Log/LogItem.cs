@@ -4,7 +4,13 @@ namespace Mal.XF.Infra.Log
 {
     public class LogItem
     {
-        public LogItem(LogSeverity severity, DateTime dateTime, string message)
+        public LogItem(LogSeverity severity, string message)
+            : this(severity, message, DateTime.Now)
+        {
+
+        }
+
+        public LogItem(LogSeverity severity, string message, DateTime dateTime)
         {
             Severity = severity;
             DateTime = dateTime;

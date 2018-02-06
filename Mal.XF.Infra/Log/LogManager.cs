@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Mal.XF.Infra.Threading;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -9,27 +9,46 @@ namespace Mal.XF.Infra.Log
     internal class LogManager : ILogManager
     {
         public const string LogKey = "LogKey";
+        private readonly ActionDelayed writeLogActionDelayed;
+        private List<LogItem> logItems;
+
+        public LogManager()
+        {
+            this.writeLogActionDelayed = new ActionDelayed();
+        }
 
         public IReadOnlyCollection<LogItem> GetLogs()
-            => GetProperty<IReadOnlyCollection<LogItem>>(LogKey);
-
-        public async void WriteLog(LogItem item)
         {
-#pragma warning disable CS4014 
+            this.EnsureLogItems();
+            return this.logItems;
+        }
+
+        public void WriteLog(LogItem item)
+        {
+            this.EnsureLogItems();
+            this.logItems.Add(item);
+            this.writeLogActionDelayed.Start(this.WriteLogWithDelay);
+        }
+
+        public void WriteLogWithDelay()
+        {
             // Fire and forget
             Task.Run(async () =>
             {
-                var logs = this.GetLogs();
-
-                await SetPropertyAsync(LogKey,
-                    logs.Concat(new[] { item }));
+                await SetPropertyAsync(LogKey, this.logItems);
             });
-#pragma warning restore CS4014 
         }
 
         public async void ClearLog()
         {
+            this.logItems = null;
             await SetPropertyAsync(LogKey, string.Empty);
+        }
+
+        private void EnsureLogItems()
+        {
+            if (this.logItems == null)
+                this.logItems = new List<LogItem>(GetProperty<IReadOnlyCollection<LogItem>>(LogKey));
         }
 
         private static T GetProperty<T>(string key)

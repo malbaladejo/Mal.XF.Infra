@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Mal.XF.Infra.Log
 {
@@ -10,6 +11,7 @@ namespace Mal.XF.Infra.Log
 
         }
 
+        [JsonConstructor]
         public LogItem(LogSeverity severity, string message, DateTime dateTime)
         {
             Severity = severity;

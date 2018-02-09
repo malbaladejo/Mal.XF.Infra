@@ -1,6 +1,6 @@
 ﻿namespace Mal.XF.Infra.Log
 {
-    internal class Logger : ILogger
+    public class Logger : ILogger
     {
         private readonly LogManager logManager;
 

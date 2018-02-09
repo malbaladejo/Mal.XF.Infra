@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.Navigation;
+﻿using Mal.XF.Infra.Extensions;
+using Mal.XF.Infra.Navigation;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Mal.XF.Infra.Pages.MasterMenu
         {
             this.navigationService = navigationService;
 
-            this.Tokens = masterDetailNavigationService.Tokens;
+            this.Tokens = masterDetailNavigationService.Tokens.OrderBy(t => t.DisplayOrder).ToReadOnlyCollection();
             this.Title = masterDetailNavigationService.Title;
         }
 

@@ -22,7 +22,12 @@ namespace Mal.XF.Infra.Pages.Log
             this.RefreshCommand = new DelegateCommand(this.RefreshLogs);
             this.ClearCommand = new DelegateCommand(this.ClearLog);
 
-            this.SeverityFilters = new[] { new SeverityViewModel(LogSeverity.Debug), new SeverityViewModel(LogSeverity.Info), new SeverityViewModel(LogSeverity.Error) };
+            this.SeverityFilters = new[]
+            {
+                new SeverityViewModel(LogSeverity.Debug),
+                new SeverityViewModel(LogSeverity.Info),
+                new SeverityViewModel(LogSeverity.Error)
+            };
             this.SeverityFilters.ForEach(f => f.PropertyChanged += FilterSelectionChanged);
         }
 
@@ -55,7 +60,8 @@ namespace Mal.XF.Infra.Pages.Log
         {
             this.SeverityFilters.ForEach(i => i.InitializeFromLogItems(this.logsItems));
             this.LogsItems.Clear();
-            LogsItems.AddRange(this.logsItems.Where(i => this.SeverityFilters.Any(f => f.IsMatch(i))));
+            var filteredItems = this.logsItems.Where(i => this.SeverityFilters.Any(f => f.IsMatch(i)));
+            this.LogsItems.AddRange(filteredItems);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

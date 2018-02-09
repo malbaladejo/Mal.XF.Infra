@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.Threading;
+﻿using System;
+using Mal.XF.Infra.Threading;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Log
 {
-    internal class LogManager : ILogManager
+    public class LogManager : ILogManager
     {
         public const string LogKey = "LogKey";
         private readonly ActionDelayed writeLogActionDelayed;
@@ -48,7 +49,10 @@ namespace Mal.XF.Infra.Log
         private void EnsureLogItems()
         {
             if (this.logItems == null)
-                this.logItems = new List<LogItem>(GetProperty<IReadOnlyCollection<LogItem>>(LogKey));
+            {
+                var items = GetProperty<IReadOnlyCollection<LogItem>>(LogKey);
+                this.logItems = items == null ? new List<LogItem>() : new List<LogItem>(items);
+            }
         }
 
         private static T GetProperty<T>(string key)
@@ -56,7 +60,14 @@ namespace Mal.XF.Infra.Log
             if (Application.Current.Properties.ContainsKey(key))
             {
                 var data = (string)Application.Current.Properties[key];
-                return JsonConvert.DeserializeObject<T>(data);
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>(data);
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
 
             return default(T);

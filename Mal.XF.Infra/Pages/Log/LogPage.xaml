@@ -2,8 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:layouts="clr-namespace:Mal.XF.Infra.Layouts;assembly=Mal.XF.Infra"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Mal.XF.Infra.Pages.Log.LogPage">
-    <Button Command="{Binding RefreshCommand}">Refresh</Button>
-    <Button Command="{Binding ClearCommand}">Clear</Button>
+             x:Class="Mal.XF.Infra.Pages.Log.LogPage"
+             Title="Log">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Command="{Binding RefreshCommand}"
+                    Text="Refresh" />
+            <Button Command="{Binding ClearCommand}"
+                    Text="Clear" />
+        </StackLayout>
+
+        <!--<layouts:RepeaterLayout ItemsSource="{Binding SeverityFilters}"
+                                Orientation="Horizontal">
+            <layouts:RepeaterLayout.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Severity}" />
+                        <Label Text="{Binding NumberOfItems}" />
+                        <Switch IsToggled="{Binding IsSelected}" />
+                    </StackLayout>
+                </DataTemplate>
+            </layouts:RepeaterLayout.ItemTemplate>
+        </layouts:RepeaterLayout>-->
+        
+        <!--<StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
+            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
+            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
+        </StackLayout>-->
+
+        <ListView ItemsSource="{Binding LogsItems}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Severity}" />
+                                <Label Grid.Column="1" Text="{Binding DateTime}" />
+                            </Grid>
+                            <Label Text="{Binding Message}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
 </ContentPage>

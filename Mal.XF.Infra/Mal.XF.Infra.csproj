@@ -39,6 +39,7 @@
     <Compile Include="Converters\FilePathToImageSourceConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
     <Compile Include="IO\IFileService.cs" />
+    <Compile Include="Layouts\RepeaterLayout.cs" />
     <Compile Include="Localisation\ITranslationManager.cs" />
     <Compile Include="Localisation\ITranslationManagerReader.cs" />
     <Compile Include="Localisation\ITranslationProvider.cs" />

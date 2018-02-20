@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.Navigation;
+﻿using Mal.XF.Infra.Fonts;
+using Mal.XF.Infra.Navigation;
 
 namespace Mal.XF.Infra.Pages.Log
 {
@@ -6,7 +7,7 @@ namespace Mal.XF.Infra.Pages.Log
     {
         public INavigationToken NavigationToken => new LogToken();
 
-        public string Icon => "";
+        public string Icon => IconFont.Bug;
 
         public string Label => "Log";
 

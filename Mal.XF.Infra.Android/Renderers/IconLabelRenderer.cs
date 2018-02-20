@@ -1,4 +1,5 @@
 ﻿using Android.Graphics;
+using Java.Lang;
 using Mal.XF.Infra.Android.Renderers;
 using Mal.XF.Infra.Controls;
 using Xamarin.Forms;
@@ -13,11 +14,19 @@ namespace Mal.XF.Infra.Android.Renderers
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
-            base.OnElementChanged(e);
-            if (e.OldElement == null)
+            try
             {
-                //The ttf in /Assets is CaseSensitive, so name it FontAwesome.ttf
-                Control.Typeface = Typeface.CreateFromAsset(Forms.Context.Assets, IconLabel.TypefaceFileName);
+                base.OnElementChanged(e);
+                if (e.OldElement == null)
+                {
+                    var font = Typeface.CreateFromAsset(Xamarin.Forms.Forms.Context.ApplicationContext.Assets, "fontawesome.ttf");
+                    //Control.SetTypeface(font, TypefaceStyle.Normal);
+                    Control.Typeface = font;
+                }
+            }
+            catch (Exception exp)
+            {
+
             }
         }
     }

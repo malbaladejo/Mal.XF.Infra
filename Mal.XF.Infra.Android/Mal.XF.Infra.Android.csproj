@@ -128,6 +128,8 @@
     <Compile Include="IO\AndroidFileService.cs" />
     <Compile Include="Net\AndroidNetworkService.cs" />
     <Compile Include="PlatformInitializers\AndroidInitializerBase.cs" />
+    <Compile Include="Renderers\FontProvider.cs" />
+    <Compile Include="Renderers\IconButtonRenderer.cs" />
     <Compile Include="Renderers\IconLabelRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

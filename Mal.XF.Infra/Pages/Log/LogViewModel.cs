@@ -45,7 +45,7 @@ namespace Mal.XF.Infra.Pages.Log
 
         private void RefreshLogs()
         {
-            this.logsItems = this.logManager.GetLogs();
+            this.logsItems = this.logManager.GetLogs().OrderByDescending(l => l.DateTime).ToList();
             this.RefreshFilter();
         }
 
@@ -60,6 +60,10 @@ namespace Mal.XF.Infra.Pages.Log
         {
             this.SeverityFilters.ForEach(i => i.InitializeFromLogItems(this.logsItems));
             this.LogsItems.Clear();
+
+            if (this.logsItems == null)
+                return;
+
             var filteredItems = this.logsItems.Where(i => this.SeverityFilters.Any(f => f.IsMatch(i)));
             this.LogsItems.AddRange(filteredItems);
         }

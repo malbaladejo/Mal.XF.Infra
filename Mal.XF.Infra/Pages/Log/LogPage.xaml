@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:layouts="clr-namespace:Mal.XF.Infra.Layouts;assembly=Mal.XF.Infra"
+             xmlns:log="clr-namespace:Mal.XF.Infra.Pages.Log;assembly=Mal.XF.Infra"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mal.XF.Infra.Pages.Log.LogPage"
              Title="Log">
@@ -26,27 +27,26 @@
                 </DataTemplate>
             </layouts:RepeaterLayout.ItemTemplate>
         </layouts:RepeaterLayout>-->
-        
+
         <!--<StackLayout Orientation="Horizontal">
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
         </StackLayout>-->
 
-        <ListView ItemsSource="{Binding LogsItems}" >
+        <ListView ItemsSource="{Binding LogsItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding Severity}" />
-                                <Label Grid.Column="1" Text="{Binding DateTime}" />
-                            </Grid>
-                            <Label Text="{Binding Message}" />
+                            <Label Text="{Binding DateTime}"
+                                   TextColor="{Binding Severity,
+                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
+
+                            <Label Text="{Binding Message}"
+                                   LineBreakMode="TailTruncation" 
+                                   TextColor="{Binding Severity,
+                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

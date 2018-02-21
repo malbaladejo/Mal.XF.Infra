@@ -4,6 +4,7 @@
     {
         Debug = 0,
         Info = 1,
-        Error = 2
+        Warning = 2,
+        Error = 3
     }
 }

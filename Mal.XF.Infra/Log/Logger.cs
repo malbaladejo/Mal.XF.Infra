@@ -1,4 +1,7 @@
-﻿namespace Mal.XF.Infra.Log
+﻿using Mal.XF.Infra.Extensions;
+using System;
+
+namespace Mal.XF.Infra.Log
 {
     public class Logger : ILogger
     {
@@ -10,15 +13,21 @@
         }
 
         public void Debug(string message)
-            => this.WriteLog(message, LogSeverity.Debug);
+            => this.WriteLog(LogSeverity.Debug, message);
 
         public void Info(string message)
-            => this.WriteLog(message, LogSeverity.Info);
+            => this.WriteLog(LogSeverity.Info, message);
+
+        public void Warning(string message)
+            => this.WriteLog(LogSeverity.Warning, message);
 
         public void Error(string message)
-            => this.WriteLog(message, LogSeverity.Error);
+            => this.WriteLog(LogSeverity.Error, message);
 
-        private void WriteLog(string message, LogSeverity severity)
-            => this.logManager.WriteLog(new LogItem(severity, message));
+        public void Error(string message, Exception e)
+            => this.WriteLog(LogSeverity.Error, message, e?.DumpAsString());
+
+        private void WriteLog(LogSeverity severity, string message, string data = null)
+            => this.logManager.WriteLog(new LogItem(severity, message, data));
     }
 }

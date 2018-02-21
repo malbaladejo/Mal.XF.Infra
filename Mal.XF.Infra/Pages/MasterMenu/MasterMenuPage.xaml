@@ -13,8 +13,11 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <controls:IconLabel Text="{Binding Icon}"  />
-                            <Label Text="{Binding Label, Converter={x:Static localisation:TranslationConverter.Instance}}"  />
+                            <controls:IconLabel Text="{Binding Icon}" 
+                                                VerticalOptions="Center" />
+                            <Label Text="{Binding Label, Converter={x:Static localisation:TranslationConverter.Instance}}" 
+                                   LineBreakMode="TailTruncation"
+                                   VerticalOptions="Center" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

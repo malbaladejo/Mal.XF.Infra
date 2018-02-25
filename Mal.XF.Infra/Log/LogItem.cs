@@ -1,28 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 
 namespace Mal.XF.Infra.Log
 {
     public class LogItem
     {
-        public LogItem(LogSeverity severity, string message, string data = null)
-            : this(severity, message, data, DateTime.Now)
+        public LogItem(LogSeverity severity, string message, string data, DateTime dateTime, string className, string methodName)
         {
-
-        }
-
-        [JsonConstructor]
-        public LogItem(LogSeverity severity, string message, string data, DateTime dateTime)
-        {
-            Severity = severity;
-            DateTime = dateTime;
-            Message = message;
+            this.Severity = severity;
+            this.DateTime = dateTime;
+            this.Message = message;
             this.Data = data;
+            this.ClassName = className;
+            this.MethodName = methodName;
         }
 
         public LogSeverity Severity { get; }
         public DateTime DateTime { get; }
         public string Message { get; }
         public string Data { get; }
+        public string ClassName { get; }
+        public string MethodName { get; }
     }
 }

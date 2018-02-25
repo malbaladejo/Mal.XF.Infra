@@ -6,7 +6,7 @@ using System;
 
 namespace Mal.XF.Infra.Android.Net
 {
-    internal class AndroidNetworkService : INetworkService
+    public class AndroidNetworkService : INetworkService
     {
         public bool IsWifiEnabled()
         {
@@ -20,6 +20,5 @@ namespace Mal.XF.Infra.Android.Net
                 throw new Exception("Have you defined user permissions android.permission.ACCESS_WIFI_STATE and android.permission.ACCESS_NETWORK_STATE?", e);
             }
         }
-
     }
 }

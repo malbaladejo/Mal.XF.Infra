@@ -15,12 +15,16 @@ namespace Mal.XF.Infra.Extensions
             return date;
         }
 
-        public static DateTime GetNextHour(this DateTime date)
-            => date.Date.AddHours(date.Date.Hour + 1);
+        public static DateTime GetCurrentDatePlusOneHour(this DateTime date)
+        {
+            return date.Date.AddHours(date.Hour + 1);
+        }
 
         public static DateTime GetNextHour(this DateTime date, int hour)
-            => date.Hour < hour
-                ? date.Date.Date.AddHours(hour)
-                : date.Date.AddDays(1).Date.AddHours(hour);
+        {
+            return date.Hour < hour
+                    ? date.Date.AddHours(hour)
+                    : date.AddDays(1).Date.AddHours(hour);
+        }
     }
 }

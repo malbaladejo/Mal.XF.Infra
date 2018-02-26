@@ -21,7 +21,11 @@ namespace Mal.XF.Infra
             this.Container.RegisterInstance<ITranslationManager>(translationManager);
             this.Container.RegisterInstance<ITranslationService>(new TranslationService(translationManager));
             this.Container.RegisterInstance<ILogManager>(logManager);
-            this.Container.RegisterInstance<ILogger>(new Logger(logManager));
+#if DEBUG
+            this.Container.RegisterInstance<ILogger>(new Logger(logManager, LogSeverity.Debug));
+#else
+            this.Container.RegisterInstance<ILogger>(new Logger(logManager, LogSeverity.Error));
+#endif
             this.Container.RegisterInstance<IMasterDetailNavigationService>(new MasterDetailNavigationService());
             TranslationConverter.RegisterInstance(this.Container.Resolve<TranslationConverter>());
 

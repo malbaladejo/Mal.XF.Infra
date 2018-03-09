@@ -1,6 +1,4 @@
-﻿
-using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Pages.MasterMenu
 {
@@ -8,14 +6,7 @@ namespace Mal.XF.Infra.Pages.MasterMenu
     {
         public MasterMenuPage()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch(Exception e)
-            {
-
-            }
+            InitializeComponent();
         }
     }
 }

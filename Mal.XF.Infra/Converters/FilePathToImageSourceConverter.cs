@@ -37,7 +37,7 @@ namespace Mal.XF.Infra.Converters
             {
                 return this.fileService.GetImageSourceFromPath(filePath);
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 return null;
             }

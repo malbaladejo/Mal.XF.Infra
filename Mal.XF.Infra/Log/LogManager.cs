@@ -1,6 +1,6 @@
-﻿using System;
-using Mal.XF.Infra.Threading;
+﻿using Mal.XF.Infra.Threading;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -64,9 +64,9 @@ namespace Mal.XF.Infra.Log
                 {
                     return JsonConvert.DeserializeObject<T>(data);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    
+                    // Nothing to do
                 }
             }
 

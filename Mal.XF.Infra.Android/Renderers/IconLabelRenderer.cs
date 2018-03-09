@@ -13,7 +13,6 @@ namespace Mal.XF.Infra.Android.Renderers
         {
             base.OnElementChanged(e);
             if (e.OldElement != null) return;
-            if (e.OldElement != null) return;
             FontProvider.ApplyFont(this.Control);
         }
     }

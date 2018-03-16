@@ -10,7 +10,9 @@ namespace Mal.XF.Infra
 {
     public abstract class MasterDetailApplicationBase : ApplicationBase
     {
-        protected MasterDetailApplicationBase(IPlatformInitializer initializer = null) : base(initializer) { }
+        protected MasterDetailApplicationBase(IPlatformInitializer initializer = null) : base(initializer)
+        {
+        }
 
         protected override void OnInitialized()
         {

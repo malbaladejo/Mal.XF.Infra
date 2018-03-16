@@ -43,7 +43,7 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Fonts\IconFont.cs" />
     <Compile Include="IO\IFileService.cs" />
-    <Compile Include="Layouts\RepeaterLayout.cs" />
+    <Compile Include="Layouts\ItemsStackLayout.cs" />
     <Compile Include="Localisation\ITranslationManager.cs" />
     <Compile Include="Localisation\ITranslationManagerReader.cs" />
     <Compile Include="Localisation\ITranslationProvider.cs" />

@@ -4,6 +4,7 @@ using Mal.XF.Infra.Log;
 using Mal.XF.Infra.Navigation;
 using Mal.XF.Infra.Pages.Log;
 using Microsoft.Practices.Unity;
+using Prism.Navigation;
 using Prism.Unity;
 using Xamarin.Forms;
 
@@ -33,5 +34,7 @@ namespace Mal.XF.Infra
 
             this.Container.RegisterViewForMasterDetailNavigation<LogPage, LogViewModel>(new LogDisplayableToken());
         }
+
+        public INavigationService PrismNavigationService => this.NavigationService;
     }
 }

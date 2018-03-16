@@ -1,7 +1,4 @@
-﻿using Mal.XF.Infra.Navigation;
-using Mal.XF.Infra.Pages.MasterMenu;
-using Prism.Navigation;
-using System;
+﻿using System;
 using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Pages.Master

@@ -125,7 +125,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\MasterDetailMainActivityBase.cs" />
     <Compile Include="IO\AndroidFileService.cs" />
     <Compile Include="Net\AndroidNetworkService.cs" />
     <Compile Include="PlatformInitializers\AndroidInitializerBase.cs" />

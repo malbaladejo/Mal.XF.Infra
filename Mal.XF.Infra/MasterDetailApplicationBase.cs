@@ -19,7 +19,7 @@ namespace Mal.XF.Infra
             var menu = new MasterMenuPage();
             var menuVm = new MasterMenuViewModel(this.NavigationService, this.Container.Resolve<IMasterDetailNavigationService>());
             menu.BindingContext = menuVm;
-            var rootPage = new MasterPage(menu);
+            var rootPage = new MasterPage(menu, this.NavigationService);
             this.MainPage = rootPage;
             menuVm.NavigateToFirst();
 

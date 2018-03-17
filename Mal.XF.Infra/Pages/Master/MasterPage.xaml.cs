@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Mal.XF.Infra.Navigation;
+using Prism.Navigation;
+using System;
 using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Pages.Master
 {
     public partial class MasterPage : MasterDetailPage
     {
+        private readonly INavigationService navigationService;
+
         public NavigationPage NavigationPage { get; private set; }
 
-        public MasterPage(Page masterMenuPage)
+        public MasterPage(Page masterMenuPage, INavigationService navigationService)
         {
             try
             {
@@ -22,6 +26,13 @@ namespace Mal.XF.Infra.Pages.Master
             {
 
             }
+
+            this.navigationService = navigationService;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return this.navigationService.NavigateBack();
         }
     }
 }

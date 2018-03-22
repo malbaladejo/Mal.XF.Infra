@@ -7,15 +7,16 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mal.XF.Infra.Pages.Log.LogPage"
              Title="Log">
-    <StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Button Command="{Binding RefreshCommand}"
-                    Text="Refresh" />
-            <Button Command="{Binding ClearCommand}"
-                    Text="Clear" />
-        </StackLayout>
+    <Grid>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding RefreshCommand}"
+                        Text="Refresh" />
+                <Button Command="{Binding ClearCommand}"
+                        Text="Clear" />
+            </StackLayout>
 
-        <!--<layouts:RepeaterLayout ItemsSource="{Binding SeverityFilters}"
+            <!--<layouts:RepeaterLayout ItemsSource="{Binding SeverityFilters}"
                                 Orientation="Horizontal">
             <layouts:RepeaterLayout.ItemTemplate>
                 <DataTemplate>
@@ -28,30 +29,35 @@
             </layouts:RepeaterLayout.ItemTemplate>
         </layouts:RepeaterLayout>-->
 
-        <!--<StackLayout Orientation="Horizontal">
+            <!--<StackLayout Orientation="Horizontal">
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
             <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
         </StackLayout>-->
 
-        <ListView ItemsSource="{Binding LogsItems}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding DateTime}"
-                                   TextColor="{Binding Severity,
-                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
+            <ListView ItemsSource="{Binding LogsItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding DateTime}"
+                                       TextColor="{Binding Severity,
+                                                           Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
 
-                            <Label Text="{Binding Message}"
-                                   LineBreakMode="TailTruncation" 
-                                   TextColor="{Binding Severity,
-                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                <Label Text="{Binding Message}"
+                                       LineBreakMode="TailTruncation"
+                                       TextColor="{Binding Severity,
+                                                           Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-    </StackLayout>
+        </StackLayout>
+
+        <ActivityIndicator VerticalOptions="Center"
+                           IsRunning="True"
+                           IsVisible="{Binding IsBusy}" />
+    </Grid>
 </ContentPage>

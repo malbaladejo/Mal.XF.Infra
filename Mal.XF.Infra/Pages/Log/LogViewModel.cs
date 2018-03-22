@@ -6,6 +6,7 @@ using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms.Internals;
 
@@ -15,6 +16,8 @@ namespace Mal.XF.Infra.Pages.Log
     {
         private readonly ILogManager logManager;
         private IReadOnlyCollection<LogItem> logsItems;
+        private bool isBusy;
+
         public LogViewModel(ILogManager logManager)
         {
             this.logManager = logManager;
@@ -33,7 +36,13 @@ namespace Mal.XF.Infra.Pages.Log
 
         private void FilterSelectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.RefreshFilter();
+            this.RefreshFilterAsync();
+        }
+
+        public bool IsBusy
+        {
+            get { return this.isBusy; }
+            private set { this.SetProperty(ref this.isBusy, value); }
         }
 
         public ICommand RefreshCommand { get; }
@@ -43,29 +52,47 @@ namespace Mal.XF.Infra.Pages.Log
 
         public IReadOnlyCollection<SeverityViewModel> SeverityFilters { get; }
 
-        private void RefreshLogs()
+        private async void RefreshLogs()
         {
-            this.logsItems = this.logManager.GetLogs().OrderByDescending(l => l.DateTime).ToList();
-            this.RefreshFilter();
+            try
+            {
+                this.IsBusy = true;
+                this.logsItems = this.logManager.GetLogs().OrderByDescending(l => l.DateTime).ToList();
+                await this.RefreshFilterAsync();
+            }
+            finally
+            {
+                this.IsBusy = false;
+            }
         }
 
-        private void ClearLog()
+        private async void ClearLog()
         {
-            this.logsItems = null;
-            this.RefreshFilter();
-            this.logManager.ClearLog();
+            try
+            {
+                this.logsItems = null;
+                await this.RefreshFilterAsync();
+                this.logManager.ClearLog();
+            }
+            finally
+            {
+                this.IsBusy = false;
+            }
         }
 
-        private void RefreshFilter()
+        private Task RefreshFilterAsync()
         {
-            this.SeverityFilters.ForEach(i => i.InitializeFromLogItems(this.logsItems));
-            this.LogsItems.Clear();
+            return Task.Run(() =>
+            {
+                this.SeverityFilters.ForEach(i => i.InitializeFromLogItems(this.logsItems));
+                this.LogsItems.Clear();
 
-            if (this.logsItems == null)
-                return;
+                if (this.logsItems == null)
+                    return;
 
-            var filteredItems = this.logsItems.Where(i => this.SeverityFilters.Any(f => f.IsMatch(i)));
-            this.LogsItems.AddRange(filteredItems);
+                var filteredItems = this.logsItems.Where(i => this.SeverityFilters.Any(f => f.IsMatch(i)));
+                this.LogsItems.AddRange(filteredItems);
+            });
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

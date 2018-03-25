@@ -29,6 +29,8 @@ namespace Mal.XF.Infra.Navigation
             return true;
         }
 
+        public static INavigationToken GetCurrentNavigationToken(this INavigationService navigationService) => currentToken;
+
         private static Task NavigateAsync(this INavigationService navigationService, INavigationToken token)
         {
             var parameters = new NavigationParameters();

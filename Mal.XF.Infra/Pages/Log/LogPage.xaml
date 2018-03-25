@@ -16,26 +16,8 @@
                         Text="Clear" />
             </StackLayout>
 
-            <!--<layouts:RepeaterLayout ItemsSource="{Binding SeverityFilters}"
-                                Orientation="Horizontal">
-            <layouts:RepeaterLayout.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Severity}" />
-                        <Label Text="{Binding NumberOfItems}" />
-                        <Switch IsToggled="{Binding IsSelected}" />
-                    </StackLayout>
-                </DataTemplate>
-            </layouts:RepeaterLayout.ItemTemplate>
-        </layouts:RepeaterLayout>-->
-
-            <!--<StackLayout Orientation="Horizontal">
-            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
-            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
-            <Switch IsToggled="{Binding WallpaperConfiguration.ImageOfTheDay}"  />
-        </StackLayout>-->
-
-            <ListView ItemsSource="{Binding LogsItems}">
+            <ListView ItemsSource="{Binding LogsItems}"
+                      CachingStrategy="RecycleElement">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

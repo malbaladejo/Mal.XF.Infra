@@ -14,6 +14,11 @@ namespace Mal.XF.Infra
     {
         protected ApplicationBase(IPlatformInitializer initializer = null) : base(initializer) { }
 
+        protected override void OnInitialized()
+        {
+            this.Container.RegisterInstance<INavigationService>(this.NavigationService);
+        }
+
         protected override void RegisterTypes()
         {
             var translationManager = new TranslationManager();

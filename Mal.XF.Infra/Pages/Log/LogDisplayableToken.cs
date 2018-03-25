@@ -5,7 +5,7 @@ namespace Mal.XF.Infra.Pages.Log
 {
     internal class LogDisplayableToken : IDisplayableNavigationToken
     {
-        public INavigationToken NavigationToken => new LogToken();
+        public INavigationToken NavigationToken { get; } = new LogToken();
 
         public string Icon => IconFont.Bug;
 

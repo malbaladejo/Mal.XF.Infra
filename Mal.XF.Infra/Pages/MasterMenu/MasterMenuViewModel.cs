@@ -24,11 +24,6 @@ namespace Mal.XF.Infra.Pages.MasterMenu
             this.navigationService.NavigateByTokenAsync(token);
         }
 
-        public void NavigateToFirst()
-        {
-            this.SelectedToken = this.Tokens.FirstOrDefault();
-        }
-
         public IReadOnlyCollection<IDisplayableNavigationToken> Tokens { get; }
 
         private IDisplayableNavigationToken selectedToken;
@@ -38,13 +33,20 @@ namespace Mal.XF.Infra.Pages.MasterMenu
             get { return selectedToken; }
             set
             {
-                if (SetProperty(ref selectedToken, value) && value != null)
-                {
+                if (this.SetProperty(ref selectedToken, value) && value != null)
                     this.Navigate(value.NavigationToken);
-                }
             }
         }
 
         public string Title { get; }
+
+        public void RefreshSelectedItem()
+        {
+            var currentToken = navigationService.GetCurrentNavigationToken();
+            this.selectedToken = this.Tokens.FirstOrDefault(t =>
+                t.NavigationToken == currentToken);
+
+            this.OnPropertyChanged(nameof(this.SelectedToken));
+        }
     }
 }

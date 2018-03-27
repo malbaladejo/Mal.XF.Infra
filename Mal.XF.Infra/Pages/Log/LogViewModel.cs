@@ -36,7 +36,8 @@ namespace Mal.XF.Infra.Pages.Log
 
         private void FilterSelectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.RefreshFilterAsync();
+            if (e.PropertyName == nameof(SeverityViewModel.IsSelected))
+                this.RefreshFilterAsync();
         }
 
         public bool IsBusy

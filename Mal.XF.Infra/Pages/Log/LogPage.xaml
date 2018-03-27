@@ -16,6 +16,27 @@
                         Text="Clear" />
             </StackLayout>
 
+            <layouts:ItemsStackLayout ItemsSource="{Binding SeverityFilters}"
+                                      Orientation="Horizontal">
+                <layouts:ItemsStackLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,0,10,0">
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="Center">
+                                <Label Text="{Binding Severity}"
+                                       FontSize="Small" />
+                                <Label Text="{Binding NumberOfItems}"
+                                       FontSize="Small" />
+                            </StackLayout>
+                            <Switch IsToggled="{Binding IsSelected}"
+                                    IsEnabled="{Binding IsEnabled}"
+                                    HorizontalOptions="Center"/>
+                        </StackLayout>
+
+                    </DataTemplate>
+                </layouts:ItemsStackLayout.ItemTemplate>
+            </layouts:ItemsStackLayout>
+
             <ListView ItemsSource="{Binding LogsItems}"
                       CachingStrategy="RecycleElement">
                 <ListView.ItemTemplate>

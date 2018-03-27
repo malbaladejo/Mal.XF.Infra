@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Mal.XF.Infra.Pages.Log
 {
@@ -6,7 +7,14 @@ namespace Mal.XF.Infra.Pages.Log
     {
         public LogPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
     }
 }

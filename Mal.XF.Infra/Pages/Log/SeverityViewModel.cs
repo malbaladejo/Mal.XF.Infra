@@ -16,6 +16,7 @@ namespace Mal.XF.Infra.Pages.Log
         public void InitializeFromLogItems(IReadOnlyCollection<LogItem> items)
         {
             this.NumberOfItems = items?.Count(i => i.Severity == this.Severity) ?? 0;
+            this.IsEnabled = this.NumberOfItems > 0;
         }
 
         public bool IsMatch(LogItem item) => this.IsSelected && item.Severity == this.Severity;
@@ -34,6 +35,15 @@ namespace Mal.XF.Infra.Pages.Log
         {
             get { return this.isSelected; }
             set { this.SetProperty(ref this.isSelected, value); }
+        }
+
+
+        private bool isEnabled;
+
+        public bool IsEnabled
+        {
+            get { return this.isEnabled; }
+            private set { this.SetProperty(ref this.isEnabled, value); }
         }
     }
 }

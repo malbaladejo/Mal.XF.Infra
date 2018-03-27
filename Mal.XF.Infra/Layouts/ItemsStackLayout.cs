@@ -1,4 +1,13 @@
-﻿namespace Mal.XF.Infra.Layouts
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Reflection;
+using Xamarin.Forms;
+
+namespace Mal.XF.Infra.Layouts
 {
     /// <summary>
     /// For repeated content without a automatic scroll view. Supports DataTemplates, Horizontal and Vertical layouts !
@@ -6,177 +15,130 @@
     /// <remarks>
     /// Warning TODO NO Visualization or Paging! Handle this in your view model.
     /// </remarks>
-    //public class ItemsStackLayout : StackLayout
-    //{
-    //    #region BindAble
-    //    public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create<ItemsStackLayout, IEnumerable>(p => p.ItemsSource, default(IEnumerable<object>), BindingMode.TwoWay, null, ItemsSourceChanged);
-    //    public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create<ItemsStackLayout, object>(p => p.SelectedItem, default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
-    //    public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create<ItemsStackLayout, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
+    public class ItemsStackLayout : StackLayout
+    {
+        #region Bindable
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create<ItemsStackLayout, IEnumerable>(p => p.ItemsSource, default(IEnumerable<object>), BindingMode.TwoWay, null, ItemsSourceChanged);
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create<ItemsStackLayout, DataTemplate>(p => p.ItemTemplate, default(DataTemplate));
 
-    //    public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
+        public event EventHandler<SelectedItemChangedEventArgs> SelectedItemChanged;
 
-    //    public IEnumerable ItemsSource
-    //    {
-    //        get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-    //        set { SetValue(ItemsSourceProperty, value); }
-    //    }
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
 
-    //    public object SelectedItem
-    //    {
-    //        get { return GetValue(SelectedItemProperty); }
-    //        set { SetValue(SelectedItemProperty, value); }
-    //    }
+        public DataTemplate ItemTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+            set { SetValue(ItemTemplateProperty, value); }
+        }
 
-    //    public DataTemplate ItemTemplate
-    //    {
-    //        get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-    //        set { SetValue(ItemTemplateProperty, value); }
-    //    }
+        private static void ItemsSourceChanged(BindableObject bindable, IEnumerable oldValue, IEnumerable newValue)
+        {
+            var itemsLayout = (ItemsStackLayout)bindable;
+            itemsLayout.SetItems();
+        }
 
-    //    private static void ItemsSourceChanged(BindableObject bindable, IEnumerable oldValue, IEnumerable newValue)
-    //    {
-    //        var itemsLayout = (ItemsStackLayout)bindable;
-    //        itemsLayout.SetItems();
-    //    }
+        #endregion
 
-    //    private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
-    //    {
-    //        var itemsView = (ItemsStackLayout)bindable;
-    //        if (newValue == oldValue)
-    //            return;
+        #region item rendering
 
-    //        itemsView.SetSelectedItem(newValue);
-    //    }
-    //    #endregion
+        protected virtual void SetItems()
+        {
+            Children.Clear();
 
-    //    #region item rendering
-    //    protected readonly ICommand ItemSelectedCommand;
+            if (ItemsSource == null)
+            {
+                ObservableSource = null;
+                return;
+            }
 
-    //    protected virtual void SetItems()
-    //    {
-    //        Children.Clear();
+            foreach (var item in ItemsSource)
+                Children.Add(GetItemView(item));
 
-    //        if (ItemsSource == null)
-    //        {
-    //            ObservableSource = null;
-    //            return;
-    //        }
+            if (this.IsObservableItemSource)
+                this.ObservableSource = new ObservableCollection<object>(ItemsSource.Cast<object>());
+        }
 
-    //        foreach (var item in ItemsSource)
-    //            Children.Add(GetItemView(item));
+        private bool IsObservableItemSource => this.ItemsSource.GetType().GetTypeInfo().IsGenericType
+                                              && this.ItemsSource.GetType().GetGenericTypeDefinition() == typeof(ObservableCollection<>);
 
-    //        var isObs = ItemsSource.GetType().IsGenericType && ItemsSource.GetType().GetGenericTypeDefinition() == typeof(ObservableCollection<>);
-    //        if (isObs)
-    //        {
-    //            ObservableSource = new ObservableCollection<object>(ItemsSource.Cast<object>());
-    //        }
-    //    }
+        protected virtual View GetItemView(object item)
+        {
+            var content = this.GetItemTemplate();
 
-    //    protected virtual View GetItemView(object item)
-    //    {
-    //        var content = ItemTemplate.CreateContent();
+            var view = content as View;
+            if (view == null)
+                return null;
 
-    //        var view = content as View;
-    //        if (view == null)
-    //            return null;
+            view.BindingContext = item;
 
-    //        view.BindingContext = item;
+            return view;
+        }
 
-    //        var gesture = new TapGestureRecognizer
-    //        {
-    //            Command = ItemSelectedCommand,
-    //            CommandParameter = item
-    //        };
+        private View GetItemTemplate()
+        {
+            if (this.ItemTemplate != null)
+                return this.ItemTemplate.CreateContent() as View;
 
-    //        AddGesture(view, gesture);
+            return new ContentView();
+        }
 
-    //        return view;
-    //    }
+        private ObservableCollection<object> observableSource;
 
-    //    protected void AddGesture(View view, TapGestureRecognizer gesture)
-    //    {
-    //        view.GestureRecognizers.Add(gesture);
+        protected ObservableCollection<object> ObservableSource
+        {
+            get { return observableSource; }
+            set
+            {
+                if (observableSource != null)
+                    observableSource.CollectionChanged -= CollectionChanged;
 
-    //        var layout = view as Layout<View>;
+                observableSource = value;
 
-    //        if (layout == null)
-    //            return;
+                if (observableSource != null)
+                    observableSource.CollectionChanged += CollectionChanged;
+            }
+        }
 
-    //        foreach (var child in layout.Children)
-    //            AddGesture(child, gesture);
-    //    }
-
-    //    protected virtual void SetSelectedItem(object selectedItem)
-    //    {
-    //        var handler = SelectedItemChanged;
-    //        if (handler != null)
-    //            handler(this, new SelectedItemChangedEventArgs(selectedItem));
-    //    }
-
-    //    ObservableCollection<object> _observableSource;
-    //    protected ObservableCollection<object> ObservableSource
-    //    {
-    //        get { return _observableSource; }
-    //        set
-    //        {
-    //            if (_observableSource != null)
-    //            {
-    //                _observableSource.CollectionChanged -= CollectionChanged;
-    //            }
-    //            _observableSource = value;
-
-    //            if (_observableSource != null)
-    //            {
-    //                _observableSource.CollectionChanged += CollectionChanged;
-    //            }
-    //        }
-    //    }
-
-    //    private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    //    {
-    //        switch (e.Action)
-    //        {
-    //            case NotifyCollectionChangedAction.Add:
-    //                {
-    //                    int index = e.NewStartingIndex;
-    //                    foreach (var item in e.NewItems)
-    //                        Children.Insert(index++, GetItemView(item));
-    //                }
-    //                break;
-    //            case NotifyCollectionChangedAction.Move:
-    //                {
-    //                    var item = ObservableSource[e.OldStartingIndex];
-    //                    Children.RemoveAt(e.OldStartingIndex);
-    //                    Children.Insert(e.NewStartingIndex, GetItemView(item));
-    //                }
-    //                break;
-    //            case NotifyCollectionChangedAction.Remove:
-    //                {
-    //                    Children.RemoveAt(e.OldStartingIndex);
-    //                }
-    //                break;
-    //            case NotifyCollectionChangedAction.Replace:
-    //                {
-    //                    Children.RemoveAt(e.OldStartingIndex);
-    //                    Children.Insert(e.NewStartingIndex, GetItemView(ObservableSource[e.NewStartingIndex]));
-    //                }
-    //                break;
-    //            case NotifyCollectionChangedAction.Reset:
-    //                Children.Clear();
-    //                foreach (var item in ItemsSource)
-    //                    Children.Add(GetItemView(item));
-    //                break;
-    //        }
-    //    }
-    //    #endregion
-
-    //    public ItemsStackLayout()
-    //    {
-
-    //        ItemSelectedCommand = new Command<object>(item =>
-    //        {
-    //            SelectedItem = item;
-    //        });
-    //    }
-    //}
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    {
+                        int index = e.NewStartingIndex;
+                        foreach (var item in e.NewItems)
+                            Children.Insert(index++, GetItemView(item));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    {
+                        var item = ObservableSource[e.OldStartingIndex];
+                        Children.RemoveAt(e.OldStartingIndex);
+                        Children.Insert(e.NewStartingIndex, GetItemView(item));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        Children.RemoveAt(e.OldStartingIndex);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    {
+                        Children.RemoveAt(e.OldStartingIndex);
+                        Children.Insert(e.NewStartingIndex, GetItemView(ObservableSource[e.NewStartingIndex]));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Children.Clear();
+                    foreach (var item in ItemsSource)
+                        Children.Add(GetItemView(item));
+                    break;
+            }
+        }
+        #endregion
+    }
 }

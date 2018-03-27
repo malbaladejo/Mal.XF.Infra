@@ -12,7 +12,7 @@ namespace Mal.XF.Infra.Pages.Master
         private readonly MasterMenuPage masterMenuPage;
         public NavigationPage NavigationPage { get; private set; }
 
-        public MasterPage(Func<MasterMenuPage> masterMenuPageFactory, INavigationService navigationService)
+        public MasterPage(MasterMenuPage masterMenuPage, INavigationService navigationService)
         {
             InitializeComponent();
             this.navigationService = navigationService;
@@ -21,7 +21,7 @@ namespace Mal.XF.Infra.Pages.Master
 
             this.NavigationPage = new NavigationPage();
             this.Detail = this.NavigationPage;
-            this.masterMenuPage = masterMenuPageFactory();
+            this.masterMenuPage = masterMenuPage;
             this.Master = this.masterMenuPage;
 
             this.IsPresentedChanged += OnIsPresentedChanged;

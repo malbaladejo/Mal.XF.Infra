@@ -36,6 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationBase.cs" />
+    <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\ResponsiveGrid.cs" />
+    <Compile Include="Behaviors\ResponsiveGridBehavior.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconLabel.cs" />
     <Compile Include="Converters\FilePathToImageSourceConverter.cs" />

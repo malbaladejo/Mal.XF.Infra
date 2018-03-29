@@ -39,6 +39,7 @@
     <Compile Include="Behaviors\BehaviorBase.cs" />
     <Compile Include="Behaviors\ResponsiveGrid.cs" />
     <Compile Include="Behaviors\ResponsiveGridBehavior.cs" />
+    <Compile Include="Collections\LazyObservableCollection.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconLabel.cs" />
     <Compile Include="Converters\FilePathToImageSourceConverter.cs" />

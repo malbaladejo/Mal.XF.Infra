@@ -17,6 +17,7 @@ namespace Mal.XF.Infra.Pages.Log
         private readonly ILogManager logManager;
         private IReadOnlyCollection<LogItem> logsItems;
         private bool isBusy;
+        private bool isLazyBusy;
 
         public LogViewModel(ILogManager logManager)
         {
@@ -45,6 +46,13 @@ namespace Mal.XF.Infra.Pages.Log
             get { return this.isBusy; }
             private set { this.SetProperty(ref this.isBusy, value); }
         }
+
+        public bool IsLazyBusy
+        {
+            get { return this.isLazyBusy; }
+            private set { this.SetProperty(ref this.isLazyBusy, value); }
+        }
+
 
         public ICommand RefreshCommand { get; }
         public ICommand ClearCommand { get; }
@@ -109,6 +117,11 @@ namespace Mal.XF.Infra.Pages.Log
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             // Nothing to do
+        }
+
+        public void LoadItems()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

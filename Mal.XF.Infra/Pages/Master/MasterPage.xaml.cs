@@ -10,7 +10,7 @@ namespace Mal.XF.Infra.Pages.Master
     {
         private readonly INavigationService navigationService;
         private readonly MasterMenuPage masterMenuPage;
-        public NavigationPage NavigationPage { get; private set; }
+        public NavigationPage NavigationPage { get; }
 
         public MasterPage(MasterMenuPage masterMenuPage, INavigationService navigationService)
         {

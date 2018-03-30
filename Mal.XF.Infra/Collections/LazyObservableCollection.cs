@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 
 namespace Mal.XF.Infra.Collections
 {
-    public class LazyObservableCollection<T> : ObservableCollection<T>
+    public interface ILazyObservableCollection : IEnumerable
+    {
+        Task LoadItemsAsync(object item = null);
+        bool IsBusy { get; }
+    }
+
+    public sealed class LazyObservableCollection<T> : ObservableCollection<T>, ILazyObservableCollection
     {
         private readonly ILoadItemsStrategy<T> loadItemsStrategy;
         private readonly int pageSize;
         private bool isBusy;
 
         private int lastIndex = 0;
-        private int lastLoadedPage = 0;
+        private int lastLoadedPage = -1;
 
         public LazyObservableCollection(ILoadItemsStrategy<T> loadItemsStrategy, int pageSize)
         {
@@ -22,32 +28,32 @@ namespace Mal.XF.Infra.Collections
             this.CollectionChanged += this.OnCollectionChanged;
         }
 
-        private void OnCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Remove:
                 case NotifyCollectionChangedAction.Reset:
                     this.lastIndex = 0;
-                    this.lastLoadedPage = 0;
+                    this.lastLoadedPage = -1;
                     break;
             }
         }
 
-        public async Task LoadItemsAsync(T item)
+        public async Task LoadItemsAsync(object item = null)
         {
             if (this.IsBusy)
                 return;
 
-            var pageNumber = this.GetPageNumber(item);
+            var pageNumber = this.GetPageNumber((T)item);
 
             if (pageNumber < this.lastLoadedPage)
                 return;
 
-            this.lastLoadedPage++;
             this.IsBusy = true;
             try
             {
+                this.lastLoadedPage++;
                 var newItems = await this.loadItemsStrategy.LoadItemsAsync(this.lastLoadedPage, this.pageSize);
                 foreach (var newItem in newItems)
                     this.Add(newItem);
@@ -58,14 +64,17 @@ namespace Mal.XF.Infra.Collections
             }
         }
 
-        private int GetPageNumber<T>(T item)
+        private int GetPageNumber(T item)
         {
+            if (item == null)
+                return 0;
+
             var index = this.GetIndex(item);
             var pageNumber = index / this.pageSize;
             return pageNumber;
         }
 
-        private int GetIndex<T>(T item)
+        private int GetIndex(T item)
         {
             for (int i = lastIndex; i < this.Count; i++)
             {
@@ -88,10 +97,5 @@ namespace Mal.XF.Infra.Collections
                 this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.IsBusy)));
             }
         }
-    }
-
-    public interface ILoadItemsStrategy<T>
-    {
-        Task<IReadOnlyCollection<T>> LoadItemsAsync(int pageNumber, int pageSize);
     }
 }

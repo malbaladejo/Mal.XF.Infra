@@ -1,10 +1,10 @@
-﻿using Mal.XF.Infra.Extensions;
+﻿using Mal.XF.Infra.Collections;
+using Mal.XF.Infra.Extensions;
 using Mal.XF.Infra.Log;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,15 +14,15 @@ namespace Mal.XF.Infra.Pages.Log
 {
     internal class LogViewModel : BindableBase, INavigationAware
     {
-        private readonly ILogManager logManager;
         private IReadOnlyCollection<LogItem> logsItems;
         private bool isBusy;
         private bool isLazyBusy;
+        private readonly MockedLoadLogItemStrategy loadLogItemStrategy;
 
-        public LogViewModel(ILogManager logManager)
+        public LogViewModel()
         {
-            this.logManager = logManager;
-            this.LogsItems = new ObservableCollection<LogItem>();
+            this.loadLogItemStrategy = new MockedLoadLogItemStrategy();
+            this.LogsItems = new LazyObservableCollection<LogItem>(this.loadLogItemStrategy, 10);
             this.RefreshCommand = new DelegateCommand(this.RefreshLogs);
             this.ClearCommand = new DelegateCommand(this.ClearLog);
 
@@ -57,7 +57,7 @@ namespace Mal.XF.Infra.Pages.Log
         public ICommand RefreshCommand { get; }
         public ICommand ClearCommand { get; }
 
-        public ObservableCollection<LogItem> LogsItems { get; }
+        public LazyObservableCollection<LogItem> LogsItems { get; }
 
         public IReadOnlyCollection<SeverityViewModel> SeverityFilters { get; }
 
@@ -66,8 +66,9 @@ namespace Mal.XF.Infra.Pages.Log
             try
             {
                 this.IsBusy = true;
-                this.logsItems = this.logManager.GetLogs().OrderByDescending(l => l.DateTime).ToList();
-                await this.RefreshFilterAsync();
+                //this.logsItems = this.logManager.GetLogs().OrderByDescending(l => l.DateTime).ToList();
+                this.loadLogItemStrategy.Reset();
+                //await this.RefreshFilterAsync();
             }
             finally
             {
@@ -81,7 +82,7 @@ namespace Mal.XF.Infra.Pages.Log
             {
                 this.logsItems = null;
                 await this.RefreshFilterAsync();
-                this.logManager.ClearLog();
+                //this.logManager.ClearLog();
             }
             finally
             {
@@ -117,11 +118,6 @@ namespace Mal.XF.Infra.Pages.Log
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             // Nothing to do
-        }
-
-        public void LoadItems()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

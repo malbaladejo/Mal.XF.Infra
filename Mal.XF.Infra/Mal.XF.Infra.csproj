@@ -37,8 +37,10 @@
   <ItemGroup>
     <Compile Include="ApplicationBase.cs" />
     <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\LazyListViewBehavior.cs" />
     <Compile Include="Behaviors\ResponsiveGrid.cs" />
     <Compile Include="Behaviors\ResponsiveGridBehavior.cs" />
+    <Compile Include="Collections\ILoadItemsStrategy.cs" />
     <Compile Include="Collections\LazyObservableCollection.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconLabel.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Navigation\NavigationTokenBase.cs" />
     <Compile Include="Net\INetworkService.cs" />
     <Compile Include="Net\WebClient.cs" />
+    <Compile Include="Pages\Log\LoadLogItemStrategy.cs" />
     <Compile Include="Pages\Log\LogDisplayableToken.cs" />
     <Compile Include="Pages\Log\LogPage.xaml.cs">
       <DependentUpon>LogPage.xaml</DependentUpon>

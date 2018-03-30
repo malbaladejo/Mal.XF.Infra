@@ -4,67 +4,62 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:layouts="clr-namespace:Mal.XF.Infra.Layouts;assembly=Mal.XF.Infra"
              xmlns:log="clr-namespace:Mal.XF.Infra.Pages.Log;assembly=Mal.XF.Infra"
+             xmlns:behaviors="clr-namespace:Mal.XF.Infra.Behaviors;assembly=Mal.XF.Infra"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mal.XF.Infra.Pages.Log.LogPage"
              Title="Log">
-    <Grid>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Button Command="{Binding RefreshCommand}"
-                        Text="Refresh" />
-                <Button Command="{Binding ClearCommand}"
-                        Text="Clear" />
-            </StackLayout>
 
-            <layouts:ItemsStackLayout ItemsSource="{Binding SeverityFilters}"
-                                      Orientation="Horizontal">
-                <layouts:ItemsStackLayout.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Margin="0,0,10,0">
-                            <StackLayout Orientation="Horizontal"
-                                         HorizontalOptions="Center">
-                                <Label Text="{Binding Severity}"
-                                       FontSize="Small" />
-                                <Label Text="{Binding NumberOfItems}"
-                                       FontSize="Small" />
-                            </StackLayout>
-                            <Switch IsToggled="{Binding IsSelected}"
-                                    IsEnabled="{Binding IsEnabled}"
-                                    HorizontalOptions="Center"/>
-                        </StackLayout>
 
-                    </DataTemplate>
-                </layouts:ItemsStackLayout.ItemTemplate>
-            </layouts:ItemsStackLayout>
-
-            <ListView ItemsSource="{Binding LogsItems}"
-                      CachingStrategy="RecycleElement"
-                      ItemAppearing="OnItemAppearing">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding DateTime}"
-                                       TextColor="{Binding Severity,
-                                                           Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
-
-                                <Label Text="{Binding Message}"
-                                       LineBreakMode="TailTruncation"
-                                       TextColor="{Binding Severity,
-                                                           Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-            <ActivityIndicator VerticalOptions="Center"
-                               IsRunning="True"
-                               IsVisible="{Binding IsLazyBusy}" />
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Command="{Binding RefreshCommand}"
+                    Text="Refresh" />
+            <Button Command="{Binding ClearCommand}"
+                    Text="Clear" />
         </StackLayout>
 
-        <ActivityIndicator VerticalOptions="Center"
-                           IsRunning="True"
-                           IsVisible="{Binding IsBusy}" />
-    </Grid>
+        <layouts:ItemsStackLayout ItemsSource="{Binding SeverityFilters}"
+                                  Orientation="Horizontal">
+            <layouts:ItemsStackLayout.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="0,0,10,0">
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="Center">
+                            <Label Text="{Binding Severity}"
+                                   FontSize="Small" />
+                            <Label Text="{Binding NumberOfItems}"
+                                   FontSize="Small" />
+                        </StackLayout>
+                        <Switch IsToggled="{Binding IsSelected}"
+                                IsEnabled="{Binding IsEnabled}"
+                                HorizontalOptions="Center" />
+                    </StackLayout>
+
+                </DataTemplate>
+            </layouts:ItemsStackLayout.ItemTemplate>
+        </layouts:ItemsStackLayout>
+
+        <ListView CachingStrategy="RecycleElement"
+                  ItemsSource="{Binding LogsItems}">
+            <ListView.Behaviors>
+                <behaviors:LazyListViewBehavior />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding DateTime}"
+                                   TextColor="{Binding Severity,
+                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
+
+                            <Label Text="{Binding Message}"
+                                   LineBreakMode="TailTruncation"
+                                   TextColor="{Binding Severity,
+                                                       Converter={x:Static log:LogSeverityToColorConverter.Instance}}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

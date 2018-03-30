@@ -16,15 +16,5 @@ namespace Mal.XF.Infra.Pages.Log
 
             }
         }
-
-        private void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            if (this.ViewModel == null)
-                return;
-
-            this.ViewModel.LoadItems();
-        }
-
-        private LogViewModel ViewModel => this.BindingContext as LogViewModel;
     }
 }

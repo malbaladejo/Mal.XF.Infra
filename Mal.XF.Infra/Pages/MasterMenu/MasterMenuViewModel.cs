@@ -15,7 +15,9 @@ namespace Mal.XF.Infra.Pages.MasterMenu
         {
             this.navigationService = navigationService;
 
-            this.Tokens = masterDetailNavigationService.Tokens.OrderBy(t => t.DisplayOrder).ToReadOnlyCollection();
+            this.Tokens = masterDetailNavigationService.Tokens.OrderBy(t => t.DisplayOrder)
+                                                              .ThenBy(t => t.Label)
+                                                              .ToReadOnlyCollection();
             this.Title = masterDetailNavigationService.Title;
         }
 

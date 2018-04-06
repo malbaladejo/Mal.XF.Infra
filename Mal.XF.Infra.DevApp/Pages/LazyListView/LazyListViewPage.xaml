@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviors="clr-namespace:Mal.XF.Infra.Behaviors;assembly=Mal.XF.Infra"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Mal.XF.Infra.DevApp.Pages.LazyListView.LazyListViewPage"
+             Title="Lazy ListView">
+    <ListView CachingStrategy="RecycleElement"
+              ItemsSource="{Binding LogsItems}">
+        <ListView.Behaviors>
+            <behaviors:LazyListViewBehavior />
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

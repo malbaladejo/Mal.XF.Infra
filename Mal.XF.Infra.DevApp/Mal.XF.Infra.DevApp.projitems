@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>868fb5d6-7978-48f4-89bf-7282d62c42aa</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mal.XF.Infra.DevApp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\LocalTranslationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\TranslationKeys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\ImageLoadItemsStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewDisplayableToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewPage.xaml.cs">
+      <DependentUpon>LazyListViewPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainDisplayableToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Localisation\Resources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Localisation\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

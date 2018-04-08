@@ -28,6 +28,11 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml.cs">
+      <DependentUpon>ResponsiveGridPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
@@ -49,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

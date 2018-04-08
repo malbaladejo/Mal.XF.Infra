@@ -4,5 +4,6 @@
     {
         public static readonly string Home = LocalTranslationProvider.LocalPrefix + "Home";
         public static readonly string LazyListView = LocalTranslationProvider.LocalPrefix + "LazyListView";
+        public static readonly string ResponsiveGrid = LocalTranslationProvider.LocalPrefix + "ResponsiveGrid";
     }
 }

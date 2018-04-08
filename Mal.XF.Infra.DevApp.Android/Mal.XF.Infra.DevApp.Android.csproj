@@ -144,6 +144,8 @@
   <ItemGroup>
     <Compile Include="AndroidInitializer.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Pages\ResponsiveGrid\ResponsiveGridDisplayableToken.cs" />
+    <Compile Include="Pages\ResponsiveGrid\ResponsiveGridToken.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

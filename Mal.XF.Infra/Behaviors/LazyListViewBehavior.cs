@@ -23,7 +23,7 @@ namespace Mal.XF.Infra.Behaviors
         {
             base.OnDetachingFrom(list);
             this.AssociatedObject.ItemAppearing -= OnItemAppearing;
-			this.AssociatedObject.PropertyChanged -= this.OnAssociatedObjectPropertyChanged;
+            this.AssociatedObject.PropertyChanged -= this.OnAssociatedObjectPropertyChanged;
         }
 
         private void OnAssociatedObjectPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

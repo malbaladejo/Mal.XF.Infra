@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="ApplicationBase.cs" />
     <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\DisableSelectionListViewBehavior.cs" />
     <Compile Include="Behaviors\LazyListViewBehavior.cs" />
     <Compile Include="Behaviors\ResponsiveGrid.cs" />
     <Compile Include="Behaviors\ResponsiveGridBehavior.cs" />

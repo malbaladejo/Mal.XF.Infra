@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mal.XF.Infra.DevApp.Pages.ResponsiveGrid.ResponsiveGridPage"
+             xmlns:behaviors="clr-namespace:Mal.XF.Infra.Behaviors;assembly=Mal.XF.Infra"
+             Title="ResponsiveGrid">
+    <Grid>
+        <Grid.Behaviors>
+            <behaviors:ResponsiveGridBehavior />
+        </Grid.Behaviors>
+        <Grid BackgroundColor="Red" 
+              HeightRequest="50"
+              Margin="5"
+              behaviors:ResponsiveGrid.Row="0"
+              behaviors:ResponsiveGrid.Small="6"
+              behaviors:ResponsiveGrid.Medium="4"
+              behaviors:ResponsiveGrid.Large="3" />
+
+        <Grid BackgroundColor="Blue" 
+              HeightRequest="50"
+              Margin="5"
+              behaviors:ResponsiveGrid.Row="0"
+              behaviors:ResponsiveGrid.Small="6"
+              behaviors:ResponsiveGrid.Medium="4"
+              behaviors:ResponsiveGrid.Large="3"  />
+
+        <Grid BackgroundColor="Yellow" 
+              HeightRequest="50"
+              Margin="5"
+              behaviors:ResponsiveGrid.Row="0"
+              behaviors:ResponsiveGrid.Small="6"
+              behaviors:ResponsiveGrid.Medium="4"
+              behaviors:ResponsiveGrid.Large="3"  />
+
+        <Grid BackgroundColor="Green" 
+              HeightRequest="50"
+              Margin="5"
+              behaviors:ResponsiveGrid.Row="0"
+              behaviors:ResponsiveGrid.Small="6"
+              behaviors:ResponsiveGrid.Medium="4"
+              behaviors:ResponsiveGrid.Large="3"  />
+    </Grid>
+</ContentPage>

@@ -123,4 +123,7 @@
   <data name="LazyListView" xml:space="preserve">
     <value>Lazy ListView</value>
   </data>
+  <data name="ResponsiveGrid" xml:space="preserve">
+    <value>ResponsiveGrid</value>
+  </data>
 </root>

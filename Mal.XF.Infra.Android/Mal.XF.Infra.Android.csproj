@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\AndroidFileService.cs" />
+    <Compile Include="MainActivityBase.cs" />
     <Compile Include="Net\AndroidNetworkService.cs" />
     <Compile Include="PlatformInitializers\AndroidInitializerBase.cs" />
     <Compile Include="Renderers\FontProvider.cs" />

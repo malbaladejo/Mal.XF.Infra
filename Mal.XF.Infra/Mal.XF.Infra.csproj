@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Pages\MasterMenu\MasterMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenHelper.cs" />
     <Compile Include="Threading\ActionDelayed.cs" />
   </ItemGroup>
   <ItemGroup>

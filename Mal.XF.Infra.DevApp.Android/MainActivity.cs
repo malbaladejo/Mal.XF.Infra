@@ -2,11 +2,12 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Mal.XF.Infra.Android;
 
 namespace Mal.XF.Infra.DevApp.Droid
 {
     [Activity(Label = "Mal.XF.Infra.DevApp", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : MainActivityBase
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -15,7 +16,6 @@ namespace Mal.XF.Infra.DevApp.Droid
 
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

@@ -117,13 +117,15 @@ namespace Mal.XF.Infra.Behaviors
         {
             var container = this.GetContainer();
 
-            if (container.Width >= LargeWidth)
+            var widthInPixel = ScreenHelper.GetDimensionInPixels(container.Width);
+
+            if (widthInPixel >= LargeWidth)
                 return GridWidth.Large;
 
-            if (container.Width >= MediumWidth)
+            if (widthInPixel >= MediumWidth)
                 return GridWidth.Medium;
 
-            if (container.Width >= SmallWidth)
+            if (widthInPixel >= SmallWidth)
                 return GridWidth.Small;
 
             return GridWidth.ExtraSmall;

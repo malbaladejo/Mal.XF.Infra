@@ -12,7 +12,7 @@ namespace Mal.XF.Infra.DevApp.Pages.LazyListView
         public LazyListViewModel()
         {
             this.loadItemsStrategy = new ImageLoadItemsStrategy();
-            this.Images = new LazyObservableCollection<string>(this.loadItemsStrategy, 10);
+            this.Images = new LazyObservableCollection<string>(this.loadItemsStrategy, 5);
         }
 
         public LazyObservableCollection<string> Images { get; }

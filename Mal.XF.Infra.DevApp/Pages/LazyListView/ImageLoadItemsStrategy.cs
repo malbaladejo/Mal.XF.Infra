@@ -11,9 +11,10 @@ namespace Mal.XF.Infra.DevApp.Pages.LazyListView
 {
     internal class ImageLoadItemsStrategy : ILoadItemsStrategy<string>
     {
-        public Task<IReadOnlyCollection<string>> LoadItemsAsync(int pageNumber, int pageSize)
+        public async Task<IReadOnlyCollection<string>> LoadItemsAsync(int pageNumber, int pageSize)
         {
-            return Task.Run(() => this.DownloadImageUrls(pageNumber, pageSize));
+            await Task.Delay(2000);
+            return await Task.Run(() => this.DownloadImageUrls(pageNumber, pageSize));
         }
 
         private IReadOnlyCollection<string> DownloadImageUrls(int pageNumber, int pageSize)

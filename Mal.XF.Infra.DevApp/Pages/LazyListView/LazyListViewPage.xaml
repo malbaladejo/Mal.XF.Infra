@@ -9,6 +9,7 @@
              x:Class="Mal.XF.Infra.DevApp.Pages.LazyListView.LazyListViewPage"
              Title="Lazy ListView">
     <ListView CachingStrategy="RecycleElement"
+              BackgroundColor="#E5E5E5"
               SeparatorVisibility="None"
               RowHeight="100"
               ItemsSource="{Binding Images}">
@@ -54,7 +55,12 @@
                                             VerticalOptions="Center" 
                                             HorizontalOptions="Center"
                                             TextColor="White" />
-                        <Image Source="{Binding }" />
+                        <!--<Frame OutlineColor="White" 
+                               CornerRadius="1"
+                               Padding="0,0,0,10"
+                               HorizontalOptions="Center">-->
+                        <controls:CacheAwareImage ImageUrl="{Binding }" />
+                        <!--</Frame>-->
                     </Grid>
                 </ViewCell>
             </DataTemplate>

@@ -43,6 +43,7 @@
     <Compile Include="Behaviors\ResponsiveGridBehavior.cs" />
     <Compile Include="Collections\ILoadItemsStrategy.cs" />
     <Compile Include="Collections\LazyObservableCollection.cs" />
+    <Compile Include="Controls\CacheAwareImage.cs" />
     <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\IconLabel.cs" />
     <Compile Include="Converters\FilePathToImageSourceConverter.cs" />

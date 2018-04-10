@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.DevApp.Pages.LazyListView;
+﻿using Mal.XF.Infra.DevApp.Pages.FormattedText;
+using Mal.XF.Infra.DevApp.Pages.LazyListView;
 using Mal.XF.Infra.DevApp.Pages.Main;
 using Mal.XF.Infra.DevApp.Pages.ResponsiveGrid;
 using Mal.XF.Infra.Extensions;
@@ -9,8 +10,8 @@ using Prism.Unity;
 
 namespace Mal.XF.Infra.DevApp
 {
-    public partial class App 
-	{
+    public partial class App
+    {
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
         }
@@ -34,11 +35,12 @@ namespace Mal.XF.Infra.DevApp
             this.Container.RegisterViewForMasterDetailNavigation<MainPage, MainViewModel>(new MainDisplayableToken());
             this.Container.RegisterViewForMasterDetailNavigation<LazyListViewPage, LazyListViewModel>(new LazyListViewDisplayableToken());
             this.Container.RegisterViewForMasterDetailNavigation<ResponsiveGridPage, ResponsiveGridViewModel>(new ResponsiveGridDisplayableToken());
+            this.Container.RegisterViewForMasterDetailNavigation<FormattedStringPage, FormattedStringViewModel>(new FormattedStringDisplayableToken());
         }
 
         private void RegisterServices()
         {
-           
+
         }
     }
 }

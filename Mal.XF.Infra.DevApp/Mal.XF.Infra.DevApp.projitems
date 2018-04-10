@@ -14,6 +14,13 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\LocalTranslationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\TranslationKeys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\FormattedText\FormattedStringPage.xaml.cs">
+      <DependentUpon>FormattedStringPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\FormattedText\FormattedStringDisplayableToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\FormattedText\FormattedStringViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\FormattedText\FormattedStringToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\ImageLoadItemsStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewDisplayableToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewModel.cs" />
@@ -28,10 +35,12 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridDisplayableToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml.cs">
       <DependentUpon>ResponsiveGridPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\FormattedText\FormattedStringPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

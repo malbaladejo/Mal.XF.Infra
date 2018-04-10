@@ -9,7 +9,7 @@
              x:Class="Mal.XF.Infra.DevApp.Pages.LazyListView.LazyListViewPage"
              Title="Lazy ListView">
     <ListView CachingStrategy="RecycleElement"
-              BackgroundColor="#E5E5E5"
+              BackgroundColor="Transparent"
               SeparatorVisibility="None"
               RowHeight="100"
               ItemsSource="{Binding Images}">

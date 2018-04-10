@@ -33,6 +33,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\WebView\WebViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\WebView\WebViewPage.xaml.cs">
+      <DependentUpon>WebViewPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\WebView\WebViewToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\WebView\WebViewDisplayableToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
@@ -60,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\WebView\WebViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

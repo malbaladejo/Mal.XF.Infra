@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mal.XF.Infra.DevApp.Pages.WebView.WebViewPage"
+             Title="WebView">
+
+    <StackLayout>
+        <Label Text="Before WebView" />
+        <WebView HeightRequest="200"
+                 BackgroundColor="Transparent"
+                 x:Name="webView">
+            <WebView.Source>
+                <HtmlWebViewSource Html="{Binding Html}" />
+            </WebView.Source>
+        </WebView>
+        <Label Text="After WebView" />
+    </StackLayout>
+</ContentPage>

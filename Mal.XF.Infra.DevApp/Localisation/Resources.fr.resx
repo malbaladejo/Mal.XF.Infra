@@ -126,4 +126,7 @@
   <data name="ResponsiveGrid" xml:space="preserve">
     <value>ResponsiveGrid</value>
   </data>
+  <data name="WebView" xml:space="preserve">
+    <value>WebView</value>
+  </data>
 </root>

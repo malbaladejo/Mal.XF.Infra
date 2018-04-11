@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FormattedString" xml:space="preserve">
-    <value>FormattedString</value>
+    <value>Formatted String</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -127,6 +127,6 @@
     <value>Lazy ListView</value>
   </data>
   <data name="ResponsiveGrid" xml:space="preserve">
-    <value>ResponsiveGrid</value>
+    <value>Responsive Grid</value>
   </data>
 </root>

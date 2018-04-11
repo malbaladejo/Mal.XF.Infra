@@ -1,41 +1,44 @@
 ﻿using Mal.XF.Infra.Extensions;
 using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mal.XF.Infra.Navigation
 {
-    public static class NavigationServiceExtensions
-    {
-        private static List<INavigationToken> tokens = new List<INavigationToken>();
-        private static INavigationToken currentToken;
+    //public static class NavigationServiceExtensions
+    //{
+    //    private static List<INavigationToken> tokens = new List<INavigationToken>();
+    //    private static INavigationToken currentToken;
 
-        public static Task NavigateByTokenAsync(this INavigationService navigationService, INavigationToken token)
-        {
-            if (currentToken != null)
-                tokens.Push(currentToken);
+    //    public static Func<string, string> PrepareUrl { get; set; } = (url) => url;
 
-            currentToken = token;
-            return navigationService.NavigateAsync(token);
-        }
+    //    public static Task NavigateByTokenAsync(this INavigationService navigationService, INavigationToken token)
+    //    {
+    //        if (currentToken != null)
+    //            tokens.Push(currentToken);
 
-        public static bool NavigateBack(this INavigationService navigationService)
-        {
-            if (!tokens.TryPop(out currentToken))
-                return false;
+    //        currentToken = token;
+    //        return navigationService.NavigateAsync(token);
+    //    }
 
-            navigationService.NavigateAsync(currentToken);
+    //    public static bool NavigateBack(this INavigationService navigationService)
+    //    {
+    //        if (!tokens.TryPop(out currentToken))
+    //            return false;
 
-            return true;
-        }
+    //        navigationService.NavigateAsync(currentToken);
 
-        public static INavigationToken GetCurrentNavigationToken(this INavigationService navigationService) => currentToken;
+    //        return true;
+    //    }
 
-        private static Task NavigateAsync(this INavigationService navigationService, INavigationToken token)
-        {
-            var parameters = new NavigationParameters();
-            parameters.AddNavigationToken(token);
-            return navigationService.NavigateAsync(token.Url, parameters, token.UseModalNavigation, token.Animated);
-        }
-    }
+    //    public static INavigationToken GetCurrentNavigationToken(this INavigationService navigationService) => currentToken;
+
+    //    private static Task NavigateAsync(this INavigationService navigationService, INavigationToken token)
+    //    {
+    //        var parameters = new NavigationParameters();
+    //        parameters.AddNavigationToken(token);
+    //        return navigationService.NavigateAsync(PrepareUrl(token.Url), parameters, token.UseModalNavigation, token.Animated);
+    //    }
+    //}
 }

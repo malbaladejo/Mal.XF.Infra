@@ -1,4 +1,5 @@
-﻿using Mal.XF.Infra.Log;
+﻿using Mal.XF.Infra.Collections;
+using Mal.XF.Infra.Log;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -8,10 +9,13 @@ namespace Mal.XF.Infra.DevApp.Pages.Main
     {
         private readonly ILogger logger;
 
-        public MainViewModel( ILogger logger)
+        public MainViewModel(ILoadPagesStrategy loadPagesStrategy, ILogger logger)
         {
             this.logger = logger;
+            this.Pages = new LazyObservableCollection<PageRow>(loadPagesStrategy, 5);
         }
+
+        public LazyObservableCollection<PageRow> Pages { get; }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {

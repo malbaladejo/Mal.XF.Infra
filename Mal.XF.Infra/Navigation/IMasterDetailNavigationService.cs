@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Mal.XF.Infra.Services;
 
 namespace Mal.XF.Infra.Navigation
 {
-    public interface IMasterDetailNavigationService
+    public interface IMasterDetailNavigationService : IServiceProvider<IDisplayableNavigationToken>
     {
         string Title { get; set; }
-
-        void RegisterToken(IDisplayableNavigationToken token);
-
-        IReadOnlyCollection<IDisplayableNavigationToken> Tokens { get; }
     }
 }

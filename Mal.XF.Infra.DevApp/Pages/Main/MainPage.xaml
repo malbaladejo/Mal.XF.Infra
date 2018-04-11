@@ -2,12 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviors="clr-namespace:Mal.XF.Infra.Behaviors;assembly=Mal.XF.Infra"
+             xmlns:controls="clr-namespace:Mal.XF.Infra.Controls;assembly=Mal.XF.Infra"
+             xmlns:localisation="clr-namespace:Mal.XF.Infra.Localisation;assembly=Mal.XF.Infra"
+             xmlns:layouts="clr-namespace:Mal.XF.Infra.Layouts;assembly=Mal.XF.Infra"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mal.XF.Infra.DevApp.Pages.Main.MainPage"
-             Title="Main">
+             Title="Demo">
 
     <StackLayout>
-        <Label FontSize="Large">Mal.XF.Infra.DevApp</Label>
-        <Label>Le but de cette application est de tester Mal.XF.Infra.</Label>
+        <ListView CachingStrategy="RecycleElement"
+                  BackgroundColor="Transparent"
+                  SeparatorVisibility="None"
+                  RowHeight="100"
+                  ItemsSource="{Binding Pages}"
+                  Margin="5">
+            <ListView.Behaviors>
+                <behaviors:LazyListViewBehavior />
+                <behaviors:DisableSelectionListViewBehavior />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <layouts:ItemsStackLayout Orientation="Horizontal"
+                                                  ItemsSource="{Binding Items}">
+                            <layouts:ItemsStackLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <StackLayout>
+                                            <controls:IconLabel FontSize="Large"
+                                                                Text="{Binding Icon}"
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Start" />
+                                            <Label Text="{Binding Label,
+                                                                  Converter={x:Static localisation:TranslationConverter.Instance}}"
+                                                   FontSize="Micro"
+                                                   LineBreakMode="WordWrap"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </layouts:ItemsStackLayout.ItemTemplate>
+                        </layouts:ItemsStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

@@ -29,12 +29,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LazyListView\LazyListViewToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\ILoadPagesStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\IPageRowFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\LoadPagesStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainDisplayableToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\PageCellViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\PageRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\PageRowFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridDisplayableToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridPage.xaml.cs">
       <DependentUpon>ResponsiveGridPage.xaml</DependentUpon>
@@ -42,6 +48,8 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ResponsiveGrid\ResponsiveGridViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\HomePageServiceProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main\IHomePageServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">

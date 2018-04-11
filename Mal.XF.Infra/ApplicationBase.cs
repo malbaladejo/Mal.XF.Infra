@@ -1,23 +1,14 @@
-﻿using Mal.XF.Infra.Extensions;
-using Mal.XF.Infra.Localisation;
+﻿using Mal.XF.Infra.Localisation;
 using Mal.XF.Infra.Log;
 using Mal.XF.Infra.Navigation;
-using Mal.XF.Infra.Pages.Log;
 using Microsoft.Practices.Unity;
-using Prism.Navigation;
 using Prism.Unity;
-using Xamarin.Forms;
 
 namespace Mal.XF.Infra
 {
     public abstract class ApplicationBase : PrismApplication
     {
         protected ApplicationBase(IPlatformInitializer initializer = null) : base(initializer) { }
-
-        protected override void OnInitialized()
-        {
-            this.Container.RegisterInstance<INavigationService>(this.NavigationService);
-        }
 
         protected override void RegisterTypes()
         {
@@ -31,15 +22,13 @@ namespace Mal.XF.Infra
             this.Container.RegisterInstance<ILogger>(new Logger(logManager, LogSeverity.Debug));
 #else
             this.Container.RegisterInstance<ILogger>(new Logger(logManager, LogSeverity.Error));
-#endif
-            this.Container.RegisterInstance<IMasterDetailNavigationService>(new MasterDetailNavigationService());
+#endif            
             TranslationConverter.RegisterInstance(this.Container.Resolve<TranslationConverter>());
-
-            this.Container.RegisterTypeForNavigation<NavigationPage>();
-
-            this.Container.RegisterViewForMasterDetailNavigation<LogPage, LogViewModel>(new LogDisplayableToken());
+            this.Container.RegisterType<INavigationService, NavigationService>(new ContainerControlledLifetimeManager());
         }
 
-        public INavigationService PrismNavigationService => this.NavigationService;
+        protected override void OnInitialized()
+        {
+        }
     }
 }

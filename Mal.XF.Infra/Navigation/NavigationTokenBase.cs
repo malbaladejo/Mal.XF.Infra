@@ -4,6 +4,6 @@
     {
         public virtual bool? UseModalNavigation { get; } = null;
         public virtual bool Animated { get; } = true;
-        public virtual string Url => $"NavigationPage/{this.GetType().FullName}";
+        public virtual string Url => $"{this.GetType().FullName}";
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Mal.XF.Infra.Extensions;
 using Mal.XF.Infra.Navigation;
 using Prism.Mvvm;
-using Prism.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +15,7 @@ namespace Mal.XF.Infra.Pages.MasterMenu
         {
             this.navigationService = navigationService;
 
-            this.Tokens = masterDetailNavigationService.Tokens.OrderBy(t => t.DisplayOrder)
+            this.Tokens = masterDetailNavigationService.Items.OrderBy(t => t.DisplayOrder)
                                                               .ThenBy(t => t.Label)
                                                               .ToReadOnlyCollection();
             this.Title = masterDetailNavigationService.Title;
@@ -23,8 +23,14 @@ namespace Mal.XF.Infra.Pages.MasterMenu
 
         private void Navigate(INavigationToken token)
         {
+            this.hideMaster?.Invoke();
             this.navigationService.NavigateByTokenAsync(token);
         }
+
+        public void SetHideMaster(Action newHideMaster)
+            => this.hideMaster = newHideMaster;
+
+        private Action hideMaster;
 
         public IReadOnlyCollection<IDisplayableNavigationToken> Tokens { get; }
 
@@ -48,7 +54,7 @@ namespace Mal.XF.Infra.Pages.MasterMenu
             this.selectedToken = this.Tokens.FirstOrDefault(t =>
                 t.NavigationToken == currentToken);
 
-            this.OnPropertyChanged(nameof(this.SelectedToken));
+            this.RaisePropertyChanged(nameof(this.SelectedToken));
         }
     }
 }

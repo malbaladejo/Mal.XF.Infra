@@ -7,20 +7,4 @@
                   x:Class="Mal.XF.Infra.Pages.Master.MasterPage"
                   Title="Test title">
 
-    <!--<MasterDetailPage.Master>
-        <ContentPage Title="{Binding Title}">
-            --><!--<ListView ItemsSource="{Binding Tokens}"
-                      Padding="20">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Button Text="{Binding Label,
-                                       Converter={x:Static converters:TranslationConverter.Instance}}"
-                                Command="{Binding NavigateCommand}"
-                                CommandParameter="{Binding NavigationToken}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>--><!--
-        </ContentPage>
-    </MasterDetailPage.Master>-->
-
 </MasterDetailPage>

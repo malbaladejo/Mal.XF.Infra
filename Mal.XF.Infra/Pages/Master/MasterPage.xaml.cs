@@ -1,6 +1,5 @@
 ﻿using Mal.XF.Infra.Navigation;
 using Mal.XF.Infra.Pages.MasterMenu;
-using Prism.Navigation;
 using System;
 using Xamarin.Forms;
 
@@ -8,20 +7,23 @@ namespace Mal.XF.Infra.Pages.Master
 {
     public partial class MasterPage : MasterDetailPage
     {
-        private readonly INavigationService navigationService;
         private readonly MasterMenuPage masterMenuPage;
-        public NavigationPage NavigationPage { get; }
+        private readonly NavigationPage navigationPage;
+        private readonly INavigationService navigationService;
 
-        public MasterPage(MasterMenuPage masterMenuPage, INavigationService navigationService)
+        public MasterPage(MasterMenuPage masterMenuPage, NavigationPage navigationPage, INavigationService navigationService)
         {
             InitializeComponent();
-            this.navigationService = navigationService;
 
             MasterBehavior = MasterBehavior.Popover;
 
-            this.NavigationPage = new NavigationPage();
-            this.Detail = this.NavigationPage;
+            this.Detail = new NavigationPage(navigationPage);
+
+            (masterMenuPage.BindingContext as MasterMenuViewModel)?.SetHideMaster(() => this.IsPresented = false);
+
             this.masterMenuPage = masterMenuPage;
+            this.navigationPage = navigationPage;
+            this.navigationService = navigationService;
             this.Master = this.masterMenuPage;
 
             this.IsPresentedChanged += OnIsPresentedChanged;
@@ -35,7 +37,8 @@ namespace Mal.XF.Infra.Pages.Master
 
         protected override bool OnBackButtonPressed()
         {
-            return this.navigationService.NavigateBack();
+            this.navigationService.NavigateBackAsync();
+            return true;
         }
     }
 }

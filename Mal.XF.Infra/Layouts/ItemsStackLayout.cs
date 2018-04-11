@@ -12,9 +12,6 @@ namespace Mal.XF.Infra.Layouts
     /// <summary>
     /// For repeated content without a automatic scroll view. Supports DataTemplates, Horizontal and Vertical layouts !
     /// </summary>
-    /// <remarks>
-    /// Warning TODO NO Visualization or Paging! Handle this in your view model.
-    /// </remarks>
     public class ItemsStackLayout : StackLayout
     {
         #region Bindable

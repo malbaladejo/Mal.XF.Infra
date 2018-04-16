@@ -20,6 +20,7 @@ namespace Mal.XF.Infra
         protected override void RegisterTypes()
         {
             base.RegisterTypes();
+            this.Container.RegisterInstance<IMasterDetailNavigationService>(new MasterDetailNavigationService());
             this.Container.RegisterViewWithViewModel<MasterMenuPage, MasterMenuViewModel>();
         }
 
@@ -27,8 +28,7 @@ namespace Mal.XF.Infra
         {
             base.OnInitialized();
             this.masterDetailNavigationService = this.Container.Resolve<IMasterDetailNavigationService>();
-            var rootPage = this.Container.Resolve<MasterPage>();
-            this.MainPage = rootPage;
+            this.MainPage = this.Container.Resolve<MasterPage>(); ;
             this.Navigate();
 
 #if DEBUG
